@@ -43,7 +43,7 @@
                 Remember me
               </label>
             </div>
-            <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
+            <a href="/dashboard"><button class="btn btn-primary w-100 py-2" type="submit">Login</button></a>
           </form>
           <small class="d-block text-center mt-3">Not Registerd? <a href="/register">Register Now</a>
           </small>

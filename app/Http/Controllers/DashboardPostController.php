@@ -16,11 +16,16 @@ class DashboardPostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($request)
     {
+       $totalpostingan = $request ([
+
+       ]);
         return view('dashboard.posts.index', [
-            'posts' => Post::where('user_id', auth()->user()->id)->get()
+            'posts' => Post::where('user_id', auth()->user()->id)->get(),
+            $totalpostingan = Post::where('user_id'. auth()->user()->id)->count
         ]);
+
     }
 
     /**
@@ -43,6 +48,7 @@ class DashboardPostController extends Controller
      */
     public function store(Request $request)
     {
+
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'slug' => 'required|unique:posts',
@@ -50,9 +56,10 @@ class DashboardPostController extends Controller
             'image' => 'image|file|max:10024',
             'body' => 'required'
         ]);
-
+        
         if($request->file('image')){
             $validatedData['image'] = $request->file('image')->store('post-images');
+            $validatedData['image'] = $request->file('image')->store('public/storage');
         }
 
         $validatedData['user_id'] = auth()->user()->id;
@@ -73,7 +80,8 @@ class DashboardPostController extends Controller
     public function show(Post $post)
     {
         return view('dashboard.posts.show', [
-            'post' => $post
+            'post' => $post,
+
         ]);
     }
 
@@ -103,7 +111,7 @@ class DashboardPostController extends Controller
         $rules = [
             'title' => 'required|max:255',
             'category_id' => 'required',
-            'image' => 'image|file|max:20000',
+            'image' => 'image|file|max:10024',
             'body' => 'required'
         ];
 
@@ -137,7 +145,7 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post )
     {
         if($post->image){
             Storage::delete($post->image);
@@ -145,7 +153,11 @@ class DashboardPostController extends Controller
 
         Post::destroy($post->id);
 
+        
+
         return redirect('/dashboard/posts')->with('success', 'Post has been deleted!');
+
+       
     }
 
     public function checkSlug(Request $request)

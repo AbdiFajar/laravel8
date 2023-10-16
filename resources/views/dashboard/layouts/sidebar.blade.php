@@ -13,19 +13,35 @@
               My Posts
             </a>
           </li>
-        </ul>
+          <li class="nav-item">
+            <a class="nav-link {{Request::is('dashboard/profils*') ? 'active' : ''}}" href="/dashboard/profils">
+              <span data-feather="smile"></span>
+              My Profile
+            </a>
+          </li>
+        </ul> 
         @can('admin')
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
           <span>Administrator</span>
         </h6>
+        @endcan
         <ul class="flex-column">
+        @can('admin')
           <li class="nav-item">
             <a class="nav-link {{Request::is('dashboard/categories*') ? 'active' : ''}}" href="/dashboard/categories">
               <span data-feather="grid"></span>
               Post Categories
             </a>
           </li>
-        </ul>
         @endcan
+        @if(auth()->user()->is_admin == '2')
+          <li class="nav-item">
+            <a class="nav-link {{Request::is('dashboard/users*') ? 'active' : ''}}" href="/dashboard/users">
+              <span data-feather="user"></span>
+              Users
+            </a>
+          </li>         
+          @endif        
+        </ul>
       </div>
     </nav>

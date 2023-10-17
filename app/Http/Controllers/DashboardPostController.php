@@ -16,14 +16,12 @@ class DashboardPostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($request)
+    public function index()
     {
-       $totalpostingan = $request ([
-
-       ]);
+      
         return view('dashboard.posts.index', [
             'posts' => Post::where('user_id', auth()->user()->id)->get(),
-            $totalpostingan = Post::where('user_id'. auth()->user()->id)->count
+            
         ]);
 
     }
@@ -53,7 +51,7 @@ class DashboardPostController extends Controller
             'title' => 'required|max:255',
             'slug' => 'required|unique:posts',
             'category_id' => 'required',
-            'image' => 'image|file|max:10024',
+            'image' => 'image|file|mimes:jpge,png,jpg,gif,svg|max:10024',
             'body' => 'required'
         ]);
         

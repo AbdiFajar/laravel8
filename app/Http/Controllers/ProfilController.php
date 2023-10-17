@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Profil;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class ProfilController extends Controller
 {

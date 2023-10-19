@@ -24,7 +24,7 @@
    <div class="card mb-3">
    @if($posts[0]->image)
           <div style="max-height: 400px; overflow:hidden;">
-            <img src="{{asset('storage/' . $posts[0]->image)}}" alt="{{$posts[0]->category->name}}" class="img-fluid">
+            <img src="{{asset('images/' . $posts[0]->image)}}" alt="{{$posts[0]->category->name}}" class="img-fluid">
           </div>
           @else
           <img src="https://source.unsplash.com/1200x400? {{$posts[0]->category->name}}" class="card-img-top" alt="{{$posts[0]->category->name}}">
@@ -50,7 +50,7 @@
       <div class="card">
          <div class="potition-absolute bg-dark px-3 py-2 text-white"><a href="/posts?category={{$post->category->slug}}" class="text-white text-decoration-none">{{$post->category->name}}</a></div>
          @if($post->image) 
-            <img src="{{asset('storage/' . $post->image)}}" alt="{{$post->category->name}}" class="img-fluid">
+            <img src="{{asset('images/' . $post->image)}}" alt="{{$post->category->name}}" class="img-fluid">
           @else
           <img src="https://source.unsplash.com/500x500? {{$post->category->name}}" class="card-img-top" alt="{{$post->category->name}}">
          @endif

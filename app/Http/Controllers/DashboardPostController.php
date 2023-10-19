@@ -8,6 +8,7 @@ use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class DashboardPostController extends Controller
 {
@@ -55,9 +56,10 @@ class DashboardPostController extends Controller
             'body' => 'required'
         ]);
         
-        if($request->file('image')){
-            $validatedData['image'] = $request->file('image')->store('post-images');
-            $validatedData['image'] = $request->file('image')->store('public/storage');
+        
+        if ($request->file('image')) {
+            $request->file('image')->move('images', $request->file('image')->getClientOriginalName());
+            $validatedData['image'] = $request->file('image')->getClientOriginalName();
         }
 
         $validatedData['user_id'] = auth()->user()->id;
@@ -120,11 +122,13 @@ class DashboardPostController extends Controller
 
         $validatedData = $request->validate($rules);
 
-        if($request->file('image')){
+        if ($request->file('image')) {
+            $request->file('image')->move('images', $request->file('image')->getClientOriginalName());
+            $validatedData['image'] = $request->file('image')->getClientOriginalName();
+        
             if($request->oldImage){
-                Storage::delete($request->oldImage);
+                File::delete('images/'.$request->oldImage);
             }
-            $validatedData['image'] = $request->file('image')->store('post-images');
         }
 
         $validatedData['user_id'] = auth()->user()->id;

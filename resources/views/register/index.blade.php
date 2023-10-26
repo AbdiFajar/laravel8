@@ -5,10 +5,10 @@
 <div class="row justify-content-center">
     <div class="col-md-5">
         <main class="form-registration w-100 m-auto">
-            <h1 class="h3 mb-3 fw-normal text-center">Form Registration</h1>
+            <h1 class="h3 mb-5 fw-normal text-center">Form Registration</h1>
           <form action="/register" method="post">
             @csrf
-            <div class="form-floating">
+            <div class="form-floating mb-4">
               <input type="text" name="name" class="form-control rounded-top @error('name') is-invalid @enderror" id="name" placeholder="Name" required value="{{old('name')}}">
               <label for="name">Name</label>
             @error('name')
@@ -17,7 +17,7 @@
             </div>
             @enderror     
             </div>
-            <div class="form-floating">
+            <div class="form-floating mb-4">
               <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Username" required value="{{old('username')}}">
               <label for="username">User Name</label>
             @error('username')
@@ -26,7 +26,7 @@
             </div>
             @enderror   
             </div>
-            <div class="form-floating">
+            <div class="form-floating mb-4">
               <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" required value="{{old('email')}}">
               <label for="email">Email address</label>
             @error('email')
@@ -35,7 +35,7 @@
             </div>
             @enderror   
             </div>
-            <div class="form-floating">
+            <div class="form-floating mb-4">
               <input type="password" name="password" class="form-control rounded-bottom @error('password') is-invalid @enderror" id="password" placeholder="Password" required >
               <label for="password">Password</label>
             @error('password')
@@ -44,14 +44,7 @@
             </div>
             @enderror   
             </div>
-        
-            <div class="form-check text-start my-3">
-              <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                Remember me
-              </label>
-            </div>
-            <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
+            <button class="btn btn-primary w-100 py-2" type="submit">Register</button>
           </form>
           <small class="d-block text-center mt-3">Already Registerd? <a href="/login">Login</a>
           </small>
